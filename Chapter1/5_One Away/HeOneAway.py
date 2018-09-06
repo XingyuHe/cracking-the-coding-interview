@@ -3,39 +3,38 @@ import unittest
 
 
 def one_away(s1, s2):
-    '''Check if a string can converted to another string with a single edit'''
-    if len(s1) == len(s2):
-        return one_edit_replace(s1, s2)
-    elif len(s1) + 1 == len(s2):
-        return one_edit_insert(s1, s2)
-    elif len(s1) - 1 == len(s2):
-        return one_edit_insert(s2, s1)
-    return False
+    diff_len = len(s1) - len(s2)
 
+    if diff_len > 1 or diff_len < -1:
+        return False
 
-def one_edit_replace(s1, s2):
-    edited = False
-    for c1, c2 in zip(s1, s2):
-        if c1 != c2:
-            if edited:
-                return False
-            edited = True
-    return True
+    if diff_len != 0:
+        shortstring, longstring = (s2, s1) if diff_len > 0 else (s1, s2)
+        short_len = len(shortstring)
+        short_index = long_index = 0
+        while short_index < short_len:
+            if shortstring[short_index] != longstring[long_index]:
+                long_index += 1
+                while short_index < short_len:
+                    if shortstring[short_index] != longstring[long_index]:
+                        return False
+                    short_index += 1
+                    long_index += 1
+            short_index += 1
+            long_index += 1
+        return True
 
-
-def one_edit_insert(s1, s2):
-    edited = False
-    i, j = 0, 0
-    while i < len(s1) and j < len(s2):
-        if s1[i] != s2[j]:
-            if edited:
-                return False
-            edited = True
-            j += 1
-        else:
-            i += 1
-            j += 1
-    return True
+    if diff_len == 0:
+        index = 0
+        while index < len(s1):
+            if s1[index] != s2[index]:
+                index += 1
+                while index < len(s1):
+                    if s1[index] != s2[index]:
+                        return False
+                    index += 1
+            index += 1
+        return True
 
 
 class Test(unittest.TestCase):
