@@ -3,22 +3,23 @@ import unittest
 
 
 def unique(string):
-    # Assuming character set is ASCII (128 characters)
-    if len(string) > 128:
+    if len(string) > 256:
         return False
 
-    char_set = [False for _ in range(128)]
+    counted_list = [False for i in range(256)]
     for char in string:
-        val = ord(char)
-        if char_set[val]:
-            # Char already found in string
+        value = ord(char)
+
+        if counted_list[value]:
             return False
-        char_set[val] = True
+
+        counted_list[value] = True
 
     return True
 
+
 class Test(unittest.TestCase):
-    dataT = [('abcd'), ('s4fad'), ('')]
+    dataT = [('abc¬˚ød'), ('s4fad'), ('')]
     dataF = [('23ds2'), ('hb 627jh=j ()')]
 
     def test_unique(self):
@@ -30,6 +31,7 @@ class Test(unittest.TestCase):
         for test_string in self.dataF:
             actual = unique(test_string)
             self.assertFalse(actual)
+
 
 if __name__ == "__main__":
     unittest.main()
