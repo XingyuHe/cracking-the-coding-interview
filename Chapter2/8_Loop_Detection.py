@@ -19,3 +19,4 @@ def loop_detection(ll):
         slow = slow.next
 
     return fast
+
