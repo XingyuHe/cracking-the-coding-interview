@@ -3,6 +3,7 @@ import unittest
 
 
 def is_substring(string, sub):
+    print(string)
     return string.find(sub) != -1
 
 
@@ -26,4 +27,8 @@ class Test(unittest.TestCase):
             self.assertEqual(actual, expected)
 
 if __name__ == "__main__":
-    unittest.main()
+    # unittest.main()
+    s1 = "waterbottle"
+    s2 = "erbottlewat"
+    result = string_rotation(s1, s2)
+    print(result)
