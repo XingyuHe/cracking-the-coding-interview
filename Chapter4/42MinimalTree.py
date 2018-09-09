@@ -24,3 +24,6 @@ def arrayToBinary(array, start, end):
 
 testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 22, 43, 144, 515, 4123]
 print(initiateArrayToBinary(testArray))
+
+This is Matrix#  %!
+This is Matrix#  %!
