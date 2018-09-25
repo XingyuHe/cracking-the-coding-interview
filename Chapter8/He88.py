@@ -1,24 +1,65 @@
 import copy
-def permute(orig_list):
+def duplicate_permute(string):
+    freq_dict = {}
+    for i in string:
+        if i in freq_dict:
+            freq_dict[i] += 1
 
-    if len(orig_list) == 1:
-        return [[orig_list[0]]]
+        else:
+            freq_dict[i] = 1
 
-    permutations = permute(orig_list[1:])
-    new_permutation = []
+    return duplicate_mutate_helper1(len(string), "", freq_dict)
 
-    for permutation in permutations:
+def duplicate_mutate_helper1(remaining, prefix, freq_dict):
 
-        for i in range(len(permutation) + 1):
-            temp = copy.deepcopy(permutation)
-            temp.insert(i, orig_list[0])
+    print prefix, remaining, freq_dict
 
-            new_permutation.append(temp)
+    if remaining == 0:
+        result.append(prefix)
 
-    return new_permutation
+    keys = freq_dict.keys()
 
 
-a = set("abcdefg")
-b = list(a)
-print permute(b)
-print len(permute(b))
+    for key in keys:
+        count = freq_dict[key]
+        print "loop another", key
+        if count > 0:
+            freq_dict[key] -= 1
+            duplicate_mutate_helper1(remaining - 1, prefix + key, freq_dict)
+            freq_dict[key] = count
+
+result = []
+def duplicate_permute2(string):
+    freq_dict = {}
+    for i in string:
+        if i in freq_dict:
+            freq_dict[i] += 1
+
+        else:
+            freq_dict[i] = 1
+
+    return duplicate_mutate_helper2(len(string), (), freq_dict)
+
+def duplicate_mutate_helper2(remaining, prefix, freq_dict):
+
+    print prefix, remaining, freq_dict
+
+    if remaining == 0:
+        result.append(prefix)
+
+    keys = freq_dict.keys()
+
+
+    for key in keys:
+        count = freq_dict[key]
+        print "loop another", key
+        if count > 0:
+            freq_dict[key] -= 1
+            local_prefix = prefix + (key, )
+            duplicate_mutate_helper2(remaining - 1, local_prefix, freq_dict)
+            freq_dict[key] = count
+    print result, len(result)
+
+print duplicate_permute2(list("1234"))
+
+print(result)

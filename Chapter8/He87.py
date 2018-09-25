@@ -19,5 +19,9 @@ def permute(orig_list):
 
 
 a = list("abcdefg")
-print permute(a)
+permutation = permute()
+stringPerm = []
+for i in permutation:
+    stringPerm.append("".join(i))
+print stringPerm
 print len(permute(a))
