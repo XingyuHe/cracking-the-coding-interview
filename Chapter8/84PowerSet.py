@@ -23,6 +23,7 @@ def getSubsets2(aset):
     allSubsets = []
     max = 1 << len(aset)
     for k in range(max):
+        print(k)
         subset = convertIntToSet(k, aset)
         allSubsets.append(subset)
     return allSubsets
