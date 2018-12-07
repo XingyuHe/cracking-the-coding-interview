@@ -24,5 +24,18 @@ def intersect_dict(nums1, nums2):
     print c1 , c2
     print c1 & c2
 
-print intersect([1, 2, 2, 1], [2, 2])
+def inters(nums1, nums2):
+        fq = {}
+        
+        for n in nums1:
+            fq[n] = fq.get(n, 0) + 1
+            
+        ans = []
+        for n in nums2:
+            if fq.get(n, 0) > 0:
+                ans.append(n)
+                fq[n] -= 1
+        return ans
+
+print inters([1, 2, 2, 1], [2, 2])
 print intersect_dict([1, 2, 2, 1], [2, 2])
